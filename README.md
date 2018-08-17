@@ -68,7 +68,7 @@ in root of project.
 If not yet installed, [install protoc](http://google.github.io/proto-lens/installing-protoc.html), e.g. for Mac OS, run
 
 ```sh
-$ brew install protoc
+$ brew install protobuf
 ```
 
 and for the Go protocol buffers plugin:
