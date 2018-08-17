@@ -65,12 +65,22 @@ in root of project.
 
 ## Install Protobuf Compiler (protoc)
 
-If not yet installed, [install protoc](http://google.github.io/proto-lens/installing-protoc.html), e.g. for Mac OS:
+If not yet installed, [install protoc](http://google.github.io/proto-lens/installing-protoc.html), e.g. for Mac OS, run
 
 ```sh
 $ brew install protoc
 ```
 
+and for the Go protocol buffers plugin:
+
+```sh
+$ go get -u github.com/golang/protobuf/protoc-gen-go
+```
+
+The compiler plugin `protoc-gen-go` will be installed in `$GOBIN`, defaulting to `$GOPATH/bin`. 
+It must be in your `$PATH` for the protocol compiler protoc to find it.
+
+Assuming you have run `yarn install` before (see above), which installs the `protobuf.js` dependency continue with the compilation as follows.
 To compile the schema to Go and Typescript sources run
 
 ```sh
