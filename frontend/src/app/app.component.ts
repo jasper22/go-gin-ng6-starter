@@ -10,51 +10,33 @@ import {map} from "rxjs/operators";
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    title = 'ng6-app';
+    public users: User[];
 
     constructor(private http: HttpClient) {
-        this.http.get("api/user")
+        this.getAllUsers()
+    }
+
+    public getAllUsers() {
+        this.http.get("api/secure/user")
             .pipe(
                 map((res: any) => JSON.parse(res))
             )
             .subscribe((users: User[]) => {
-                console.log(users);
+                this.users = users;
             });
+    }
 
+    public createUser() {
         let user: User = new User();
         user.Name = "Daniel";
         user.Phone = "1234";
-        this.http.post("api/user", String.fromCharCode.apply(null, User.encode(user).finish()), {
-            // String.fromCharCode.apply(null, User.encode(user).finish())
-            headers: {
-                'Accept': 'application/x-protobuf',
-                'Content-Type': 'application/x-protobuf'
-            },
-            responseType: "arraybuffer"
-        })
+        this.http.post("api/secure/user", user)
             .pipe(
-                map((res: ArrayBuffer) => User.decode(new Uint8Array(res)))
+                map((res: any) => JSON.parse(res))
             )
             .subscribe((user: User) => {
                 console.log(user);
-                this.http.get("api/user/" + user.ID, {
-                    headers: {'Accept': 'application/x-protobuf'},
-                    responseType: "arraybuffer"
-                })
-                    .pipe(
-                        map((res: ArrayBuffer) => User.decode(new Uint8Array(res)))
-                    )
-                    .subscribe((user: User) => {
-                        console.log(user);
-                    });
-                this.http.get("api/json/" + user.ID, {
-                })
-                    .pipe(
-                        map((res: any) => JSON.parse(res))
-                    )
-                    .subscribe((user: User) => {
-                        console.log(user);
-                    });
+                this.getAllUsers();
             });
     }
 }

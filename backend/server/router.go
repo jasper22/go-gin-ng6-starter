@@ -14,8 +14,6 @@ func SetupRouter() *gin.Engine {
         controllers.AuthController(public)
     }
 
-    r.GET("/api/json/:userId", controllers.GetUserByIdJson) // Todo: remove
-
     secure := r.Group("api/secure")
     {
         secure.Use(middlewares.AuthMiddleware())
