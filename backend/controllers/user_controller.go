@@ -13,6 +13,7 @@ var userService = services.GetUserServiceInstance()
 func UserController(r *gin.RouterGroup) {
     user := r.Group("user")
     {
+        // TODO: move CreateUser route / functionality to unsecured area ?
         user.POST("/", CreateUser)
         user.GET("/:userId", GetUserById)
         user.GET("/", GetAllUsers)

@@ -8,6 +8,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "CvKfLiv2fz/EiJ6Y/PP0pRHoKnw=",
+			"path": "github.com/appleboy/gin-jwt",
+			"revision": "c21115ccebd465511fefed0a0b9f9a4f5a08318d",
+			"revisionTime": "2018-07-20T00:36:47Z"
+		},
+		{
 			"checksumSHA1": "QeKwBtN2df+j+4stw3bQJ6yO4EY=",
 			"path": "github.com/gin-contrib/sse",
 			"revision": "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae",
@@ -74,7 +80,7 @@
 			"revisionTime": "2018-05-23T17:54:26Z"
 		},
 		{
-			"checksumSHA1": "ATnwV0POluBNQEMjPdylodz0oK0=",
+			"checksumSHA1": "AU3fA8Sm33Vj9PBoRPSeYfxLRuE=",
 			"path": "github.com/lib/pq/oid",
 			"revision": "90697d60dd844d5ef6ff15135d0203f65d2f53b8",
 			"revisionTime": "2018-05-23T17:54:26Z"
@@ -86,7 +92,7 @@
 			"revisionTime": "2017-11-07T05:05:31Z"
 		},
 		{
-			"checksumSHA1": "YtT3fsUdf/GGkeox3GGPgfl+0x8=",
+			"checksumSHA1": "hjWRxDD+oW8HM4CJfeY2fZbmOOw=",
 			"path": "github.com/ugorji/go/codec",
 			"revision": "0e8ffdb13c81bdb48fa80a963cf83f10a0f5a496",
 			"revisionTime": "2018-07-27T09:20:40Z"
@@ -104,5 +110,5 @@
 			"revisionTime": "2018-03-28T19:50:20Z"
 		}
 	],
-	"rootPath": "github.com/delsner/go-rest-ng6-proto"
+	"rootPath": "github.com/app8izer/go-gin-ng6-starter"
 }
