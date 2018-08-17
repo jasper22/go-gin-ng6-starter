@@ -9,16 +9,17 @@ import (
 func SetupRouter() *gin.Engine {
     r := gin.Default() // init router with default mw (e.g. logging)
 
-    r.GET("/api/json/:userId", controllers.GetUserByIdJson)
-
-    // TODO: update middlewares here
-    r.Use(middlewares.AuthMiddleware())
-
-    user := r.Group("/api/user")
+    public := r.Group("api/public")
     {
-        user.POST("/", controllers.CreateUser)
-        user.GET("/:userId", controllers.GetUserById)
-        user.GET("/", controllers.GetAllUsers)
+        controllers.AuthController(public)
+    }
+
+    r.GET("/api/json/:userId", controllers.GetUserByIdJson) // Todo: remove
+
+    secure := r.Group("api/secure")
+    {
+        secure.Use(middlewares.AuthMiddleware())
+        controllers.UserController(secure)
     }
 
     return r

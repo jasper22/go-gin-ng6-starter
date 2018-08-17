@@ -13,6 +13,15 @@ import (
 
 var userService = services.GetUserServiceInstance()
 
+func UserController(r *gin.RouterGroup)  {
+    user := r.Group("user")
+    {
+        user.POST("/", CreateUser)
+        user.GET("/:userId", GetUserById)
+        user.GET("/", GetAllUsers)
+    }
+}
+
 func GetUserById(c *gin.Context) {
     userId := c.Param("userId")
     if userId != "" {
