@@ -3,8 +3,8 @@ package repositories
 import (
     "github.com/jinzhu/gorm"
     "sync"
-    "github.com/app8izer/go-gin-ng6-starter/backend/config"
-    "github.com/app8izer/go-gin-ng6-starter/backend/models"
+    "go-gin-ng6-starter/backend/config"
+    "go-gin-ng6-starter/backend/models"
 )
 
 // needed for singleton pattern

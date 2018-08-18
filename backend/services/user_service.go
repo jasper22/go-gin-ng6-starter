@@ -2,8 +2,8 @@ package services
 
 import (
     "sync"
-    "github.com/app8izer/go-gin-ng6-starter/backend/repositories"
-    "github.com/app8izer/go-gin-ng6-starter/backend/models"
+    "go-gin-ng6-starter/backend/repositories"
+    "go-gin-ng6-starter/backend/models"
 )
 
 // Singleton setup
