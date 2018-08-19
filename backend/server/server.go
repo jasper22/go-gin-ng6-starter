@@ -10,7 +10,7 @@ func Init() {
 
     // get port from env or use default 8080
     cfg := config.GetConfig()
-    port := cfg.GetString("gin.port")
+    port := cfg.GetString("PORT")
 
     // run http server
     r.Run(":" + port)
