@@ -4,9 +4,6 @@ import (
     _ "github.com/jinzhu/gorm/dialects/postgres"
     "github.com/jinzhu/gorm"
     "fmt"
-    "os"
-    "strings"
-    "github.com/app8izer/go-gin-ng6-starter/backend/utils"
     "github.com/app8izer/go-gin-ng6-starter/backend/models"
 )
 
@@ -19,22 +16,15 @@ func init() {
         dbName   string
         dbHost   string
     )
-    if dbUrl := os.Getenv("DATABASE_URL"); dbUrl != "" {
-        username = strings.Split(strings.Split(dbUrl, "//")[1], ":")[0]
-        password = strings.Split(strings.Split(dbUrl, ":")[2], "@")[0]
-        dbName = strings.Split(strings.Split(dbUrl, "@")[1], "/")[1]
-        dbHost = strings.Split(strings.Split(dbUrl, "@")[1], ":")[0]
-    } else {
-        username = utils.GetEnv("db_user", "go_usr")
-        password = utils.GetEnv("db_pass", "go_pwd")
-        dbName = utils.GetEnv("db_name", "go_db")
-        dbHost = utils.GetEnv("db_host", "localhost")
-    }
+    cfg := GetConfig() // load global viper config
+    username = cfg.GetString("postgres.db_usr")
+    password = cfg.GetString("postgres.db_pass")
+    dbName = cfg.GetString("postgres.db_name")
+    dbHost = cfg.GetString("postgres.db_host")
+    dbUri2 := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable password=%s", dbHost, username, dbName, password) //Build connection string
+    //fmt.Println(dbUri2)
 
-    dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable password=%s", dbHost, username, dbName, password) //Build connection string
-    fmt.Println(dbUri)
-
-    conn, err := gorm.Open("postgres", dbUri)
+    conn, err := gorm.Open("postgres", dbUri2) // changed here
     if err != nil {
         fmt.Print(err)
     }

@@ -1,0 +1,5 @@
+postgres:
+    db_usr: "go_usr"
+    db_pass: "go_pwd"
+    db_name: "go_db"
+    db_host: "localhost"
