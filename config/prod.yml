@@ -3,4 +3,4 @@ PORT: 8080
 DATABASE_URL: "postgres://go_usr:go_pwd@localhost:5432/go_db"
 
 # GIN
-GIN_MODE: debug
+GIN_MODE: release
