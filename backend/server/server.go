@@ -1,6 +1,6 @@
 package server
 
-import "github.com/app8izer/go-gin-ng6-starter/backend/utils"
+import "go-gin-ng6-starter/backend/utils"
 
 func Init() {
     // setup router

@@ -4,13 +4,21 @@ import (
     "github.com/spf13/viper"
     "log"
     "os"
+    "fmt"
 )
 
 var config *viper.Viper
 
 func init()  {
-    var err error
+    // env parsing
+    if len(os.Args) < 2{
+        log.Fatal("Must provide env argument in run command")
+    }
     env := os.Args[1]
+    fmt.Printf("Using environment settings for %s \n", env)
+
+    // config parsing
+    var err error
     v := viper.New()
     v.SetConfigType("yaml")
     v.SetConfigName(env)
