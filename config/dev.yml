@@ -3,3 +3,6 @@ postgres:
     db_pass: "go_pwd"
     db_name: "go_db"
     db_host: "localhost"
+
+gin:
+    port: 8080
