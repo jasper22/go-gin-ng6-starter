@@ -18,6 +18,7 @@ func SetupRouter() *gin.Engine {
     {
         secure.Use(middlewares.AuthMiddleware())
         controllers.UserController(secure)
+        controllers.SocketController(secure, SocketServer)
     }
 
     return r

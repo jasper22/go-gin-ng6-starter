@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {models} from "./shared/types/proto-types";
 import User = models.User;
+import {SocketService} from "./shared/socket.service";
 
 @Component({
     selector: 'app-root',
@@ -11,8 +12,10 @@ import User = models.User;
 export class AppComponent {
     public users: User[];
 
-    constructor(private http: HttpClient) {
-        this.getAllUsers()
+    constructor(private http: HttpClient,
+                private socketService: SocketService) {
+        this.getAllUsers();
+        this.socketService.send("chat message", "message2");
     }
 
     public getAllUsers() {

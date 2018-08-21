@@ -3,12 +3,15 @@ package server
 import (
     "github.com/app8izer/go-gin-ng6-starter/backend/config"
     "github.com/gin-gonic/gin"
+    "github.com/googollee/go-socket.io"
 )
 
-var r *gin.Engine
+var Router *gin.Engine
+var SocketServer *socketio.Server
 
 func init() {
-    r = SetupRouter()
+    SocketServer = SetupSocketServer()
+    Router = SetupRouter()
 }
 
 func StartServer() {
@@ -16,5 +19,5 @@ func StartServer() {
     cfg := config.GetConfig()
     port := cfg.GetString("PORT")
 
-    r.Run(":" + port)
+    Router.Run(":" + port)
 }

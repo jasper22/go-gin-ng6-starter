@@ -42,13 +42,12 @@ func GetAllUsers(c *gin.Context) {
 
 func CreateUser(c *gin.Context) {
     user := models.User{}
-    err := c.ShouldBind(&user)
-    if err == nil {
+    if err := c.ShouldBind(&user); err == nil {
         res, err := json.Marshal(userService.Create(&user))
-        c.JSON(http.StatusOK, string(res))
         if err == nil {
-            return
+            c.JSON(http.StatusOK, string(res))
+        } else {
+            c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         }
     }
-    c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 }
