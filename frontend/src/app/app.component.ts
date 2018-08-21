@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {models} from "./shared/types/proto-types";
 import User = models.User;
-import {map} from "rxjs/operators";
 
 @Component({
     selector: 'app-root',
@@ -18,9 +17,6 @@ export class AppComponent {
 
     public getAllUsers() {
         this.http.get("api/secure/user")
-            .pipe(
-                map((res: any) => JSON.parse(res))
-            )
             .subscribe((users: User[]) => {
                 this.users = users;
             });
@@ -28,12 +24,9 @@ export class AppComponent {
 
     public createUser() {
         let user: User = new User();
-        user.Name = "Daniel";
+        user.Name = "User";
         user.Phone = "1234";
         this.http.post("api/secure/user", user)
-            .pipe(
-                map((res: any) => JSON.parse(res))
-            )
             .subscribe((user: User) => {
                 console.log(user);
                 this.getAllUsers();

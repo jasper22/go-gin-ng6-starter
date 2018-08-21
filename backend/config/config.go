@@ -17,8 +17,6 @@ func init()  {
     env := os.Args[1]
     fmt.Printf("Using environment settings for %s \n", env)
 
-    // TODO Implement config file for prod (and test)
-
     // config parsing
     var err error
     v := viper.New()

@@ -4,8 +4,8 @@ import (
     "net/http"
     "encoding/json"
     "github.com/gin-gonic/gin"
-    "go-gin-ng6-starter/backend/services"
-    "go-gin-ng6-starter/backend/models"
+    "github.com/app8izer/go-gin-ng6-starter/backend/services"
+    "github.com/app8izer/go-gin-ng6-starter/backend/models"
 )
 
 var userService = services.GetUserServiceInstance()
