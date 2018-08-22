@@ -1,17 +1,23 @@
 package server
 
-import "github.com/app8izer/go-gin-ng6-starter/backend/utils"
+import (
+    "github.com/app8izer/go-gin-ng6-starter/backend/config"
+    "github.com/gin-gonic/gin"
+    "github.com/googollee/go-socket.io"
+)
 
-func Init() {
-    // setup router
-    r := SetupRouter()
+var Router *gin.Engine
+var SocketServer *socketio.Server
 
-    // get port from env or use default 8080
-    port := utils.GetEnv("PORT", "8080")
+func init() {
+    SocketServer = SetupSocketServer()
+    Router = SetupRouter()
+}
 
-    // TODO: add ENV here (prod, dev, test) and setup router, server, db based on config
+func StartServer() {
+    // get config
+    cfg := config.GetConfig()
+    port := cfg.GetString("PORT")
 
-    // run http server
-    r.Run(":" + port)
-
+    Router.Run(":" + port)
 }

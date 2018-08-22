@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {models} from "./shared/types/proto-types";
+import {SocketService} from "./shared/socket.service";
+import {AuthService} from "./shared/auth.service";
 import User = models.User;
-import {map} from "rxjs/operators";
 
 @Component({
     selector: 'app-root',
@@ -11,31 +12,66 @@ import {map} from "rxjs/operators";
 })
 export class AppComponent {
     public users: User[];
+    public currentUser = null;
+    public username = 'admin';
+    public password = '1234';
+    public newUsername = '';
+    public newPassword = '';
 
-    constructor(private http: HttpClient) {
-        this.getAllUsers()
+    constructor(private http: HttpClient,
+                private socketService: SocketService,
+                private authService: AuthService) {
+
+        this.authService.currentUser.subscribe((res) => {
+            this.currentUser = res;
+        });
+
+        this.socketService.addSocketListener('connect', (res) => {
+            console.log('connect', res);
+            // send ping
+            this.socketService.send('ping', "ping_message1");
+            // connect to room
+            this.socketService.send("join_room", "room1");
+            this.socketService.addSocketListener("connected", (res) => {
+                console.log("Connected:", res);
+            });
+        });
+    }
+
+    public login() {
+        this.authService.login(this.username, this.password).subscribe((result) => {
+            if (result) {
+                console.log('Logged in!', this.authService.isAuthenticated());
+                this.getAllUsers();
+
+            } else {
+                console.log('Error!');
+            }
+        });
+    }
+
+    public logout() {
+        this.authService.logout();
     }
 
     public getAllUsers() {
-        this.http.get("api/secure/user")
-            .pipe(
-                map((res: any) => JSON.parse(res))
-            )
+        this.http.get("api/admin/user")
             .subscribe((users: User[]) => {
+                console.log(users);
                 this.users = users;
             });
     }
 
     public createUser() {
-        let user: User = new User();
-        user.Name = "Daniel";
-        user.Phone = "1234";
-        this.http.post("api/secure/user", user)
-            .pipe(
-                map((res: any) => JSON.parse(res))
-            )
-            .subscribe((user: User) => {
-                console.log(user);
+
+        const user: User = new User({
+            username: this.newUsername,
+            password: this.newPassword,
+        });
+
+        this.http.post("api/admin/user/", user)
+            .subscribe((usr: User) => {
+                console.log(usr);
                 this.getAllUsers();
             });
     }

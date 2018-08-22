@@ -1,0 +1,8 @@
+# POSTGRES
+PORT: 8080
+DATABASE_URL: "postgres://go_usr:go_pwd@localhost:5433/go_db"
+
+# GIN
+GIN_MODE: release
+JWT_REALM: prod
+JWT_SECRET: prod-secret
