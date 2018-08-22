@@ -3,24 +3,24 @@ package config
 import (
     "github.com/spf13/viper"
     "log"
-    "os"
-    "fmt"
-)
+        )
 
 var config *viper.Viper
 
 func init()  {
-    // env parsing
-    if len(os.Args) < 2{
-        log.Fatal("Must provide env argument in run command")
+    var env string
+    v := viper.New()
+    v.AutomaticEnv() // auto scan for ENV
+    if v.GetString("APP_ENV") == "" {
+        log.Printf("No env specified. Using dev as default.")
+        env = "dev"
+    } else {
+        env = v.GetString("APP_ENV")
     }
-    env := os.Args[1]
-    fmt.Printf("Using environment settings for %s \n", env)
+    log.Printf("Using environment settings for %s \n", env)
 
     // config parsing
     var err error
-    v := viper.New()
-    v.AutomaticEnv() // auto scan for ENV
     v.SetConfigType("yaml")
     v.SetConfigName(env)
     v.AddConfigPath("../config/")

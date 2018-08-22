@@ -260,7 +260,7 @@
 			"revisionTime": "2018-06-28T09:55:33Z"
 		},
 		{
-			"checksumSHA1": "YtT3fsUdf/GGkeox3GGPgfl+0x8=",
+			"checksumSHA1": "hjWRxDD+oW8HM4CJfeY2fZbmOOw=",
 			"path": "github.com/ugorji/go/codec",
 			"revision": "0e8ffdb13c81bdb48fa80a963cf83f10a0f5a496",
 			"revisionTime": "2018-07-27T09:20:40Z"
@@ -278,7 +278,7 @@
 			"revisionTime": "2018-07-28T08:01:47Z"
 		},
 		{
-			"checksumSHA1": "q5G92Cv5apjnADinMT3lSUMaBV4=",
+			"checksumSHA1": "LJ3mM8OAwWl3MvVe0URqZ7astx4=",
 			"path": "golang.org/x/sys/unix",
 			"revision": "4ea2f632f6e912459fe60b26b1749377f0d889d5",
 			"revisionTime": "2018-08-21T03:36:55Z"
