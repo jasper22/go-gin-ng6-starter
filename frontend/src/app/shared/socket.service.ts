@@ -13,11 +13,6 @@ export class SocketService {
 
     connect() {
         this.socket = io({path: SOCKET_SERVER});
-        this.addSocketListener('news', (res) => {
-            console.log('news', res);
-            this.send('event_sent', { test: "test" });
-            this.send('chat message', "message1");
-        });
     }
 
     send(event, data) {

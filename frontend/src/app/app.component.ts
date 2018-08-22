@@ -15,7 +15,16 @@ export class AppComponent {
     constructor(private http: HttpClient,
                 private socketService: SocketService) {
         this.getAllUsers();
-        this.socketService.send("chat message", "message2");
+        this.socketService.addSocketListener('connect', (res) => {
+            console.log('connect', res);
+            // send ping
+            this.socketService.send('ping', "ping_message1");
+            // connect to room
+            this.socketService.send("join_room", "room1");
+            this.socketService.addSocketListener("connected", (res) => {
+                console.log("Connected:", res);
+            });
+        });
     }
 
     public getAllUsers() {
