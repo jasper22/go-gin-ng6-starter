@@ -7,7 +7,9 @@ message User {
     uint32 updated_at = 3;
     string first_name = 4;
     string last_name = 5;
+    // @inject_tag: gorm:"unique;not null"
     string username = 6;
+    // @inject_tag: json:"-"
     string password = 7;
     enum Role {
         ROLE_USER = 0;
