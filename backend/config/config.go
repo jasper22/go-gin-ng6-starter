@@ -23,7 +23,7 @@ func init()  {
     var err error
     v.SetConfigType("yaml")
     v.SetConfigName(env)
-    v.AddConfigPath("../config/")
+    v.AddConfigPath("./config/")
     err = v.ReadInConfig()
     if err != nil {
         log.Fatal(err)
