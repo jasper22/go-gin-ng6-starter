@@ -8,6 +8,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "CvKfLiv2fz/EiJ6Y/PP0pRHoKnw=",
+			"path": "github.com/appleboy/gin-jwt",
+			"revision": "c21115ccebd465511fefed0a0b9f9a4f5a08318d",
+			"revisionTime": "2018-07-20T00:36:47Z"
+		},
+		{
 			"checksumSHA1": "7NP1qUMF8Kx1y0zANxx0e+oq9Oo=",
 			"path": "github.com/fsnotify/fsnotify",
 			"revision": "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9",
@@ -188,7 +194,7 @@
 			"revisionTime": "2018-05-23T17:54:26Z"
 		},
 		{
-			"checksumSHA1": "ATnwV0POluBNQEMjPdylodz0oK0=",
+			"checksumSHA1": "AU3fA8Sm33Vj9PBoRPSeYfxLRuE=",
 			"path": "github.com/lib/pq/oid",
 			"revision": "90697d60dd844d5ef6ff15135d0203f65d2f53b8",
 			"revisionTime": "2018-05-23T17:54:26Z"
@@ -260,6 +266,18 @@
 			"revisionTime": "2018-07-27T09:20:40Z"
 		},
 		{
+			"checksumSHA1": "oCH3J96RWvO8W4xjix47PModpio=",
+			"path": "golang.org/x/crypto/bcrypt",
+			"revision": "614d502a4dac94afa3a6ce146bd1736da82514c6",
+			"revisionTime": "2018-07-28T08:01:47Z"
+		},
+		{
+			"checksumSHA1": "oVPHWesOmZ02vLq2fglGvf+AMgk=",
+			"path": "golang.org/x/crypto/blowfish",
+			"revision": "614d502a4dac94afa3a6ce146bd1736da82514c6",
+			"revisionTime": "2018-07-28T08:01:47Z"
+		},
+		{
 			"checksumSHA1": "q5G92Cv5apjnADinMT3lSUMaBV4=",
 			"path": "golang.org/x/sys/unix",
 			"revision": "4ea2f632f6e912459fe60b26b1749377f0d889d5",
@@ -276,6 +294,12 @@
 			"path": "golang.org/x/text/unicode/norm",
 			"revision": "6e3c4e7365ddcc329f090f96e4348398f6310088",
 			"revisionTime": "2018-08-07T15:59:08Z"
+		},
+		{
+			"checksumSHA1": "t37dLDJJHFiXijVk9izoM91M9Ho=",
+			"path": "gopkg.in/dgrijalva/jwt-go.v3",
+			"revision": "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e",
+			"revisionTime": "2018-03-08T23:13:08Z"
 		},
 		{
 			"checksumSHA1": "P/k5ZGf0lEBgpKgkwy++F7K1PSg=",

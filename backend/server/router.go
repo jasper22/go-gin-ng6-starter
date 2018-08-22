@@ -9,16 +9,28 @@ import (
 func SetupRouter() *gin.Engine {
     r := gin.Default() // init router with default mw (e.g. logging)
 
+    // init authMiddleware
+    authMiddleware := middlewares.GetAuthMiddleware()
+
     public := r.Group("api/public")
     {
-        controllers.AuthController(public)
+        controllers.AuthController(authMiddleware, public)
     }
 
     secure := r.Group("api/secure")
     {
-        secure.Use(middlewares.AuthMiddleware())
+
+        secure.Use(authMiddleware.MiddlewareFunc())
         controllers.UserController(secure)
         controllers.SocketController(secure, SocketServer)
+    }
+
+    admin := r.Group("api/admin")
+    {
+        admin.Use(authMiddleware.MiddlewareFunc())
+        admin.Use(authMiddleware.AdminMiddleware)
+        controllers.AdminController(admin)
+
     }
 
     return r

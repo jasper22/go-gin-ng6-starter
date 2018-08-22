@@ -10,6 +10,7 @@ import (
 
 var db *gorm.DB // database
 
+
 func init() {
     cfg := GetConfig() // load global viper config
     dbUrl := cfg.GetString("DATABASE_URL")
@@ -24,8 +25,9 @@ func init() {
     db = conn
     // Database migration
     db.Debug().AutoMigrate(&models.User{})
-    db.Debug().AutoMigrate(&models.Address{})
-    db.Debug().AutoMigrate(&models.CreditCard{})
+
+
+
 }
 
 func splitDbUrl(dbUrl string) (username string, password string, dbName string, dbHost string) {

@@ -26,12 +26,12 @@ func GetUserRepositoryInstance() *UserRepository {
 }
 
 // Repository methods
-func (ur *UserRepository) GetByName(name string) (*models.User) {
+func (ur *UserRepository) GetByUsername(username string) (*models.User) {
     // initialize user
     u := &models.User{}
 
     // fetch database
-    err := ur.db.Table("users").Where("name = ?", name).First(&u).Error
+    err := ur.db.Table("users").Where("username = ?", username).First(&u).Error
     if err == gorm.ErrRecordNotFound {
         return nil
     }
