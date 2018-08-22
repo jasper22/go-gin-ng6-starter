@@ -1,5 +1,5 @@
 # Golang Gin + Angular 6 Web Application
-
+[![Build Status](https://travis-ci.com/app8izer/go-gin-ng6-starter.svg?branch=master)](https://travis-ci.com/app8izer/go-gin-ng6-starter)
 ## Technologies
 Starter project template using the following libraries/frameworks:
 
