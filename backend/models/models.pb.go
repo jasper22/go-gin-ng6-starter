@@ -18,25 +18,54 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+type User_Role int32
+
+const (
+	User_ROLE_USER          User_Role = 0
+	User_ROLE_CONTENT_ADMIN User_Role = 1
+	User_ROLE_ADMIN         User_Role = 2
+)
+
+var User_Role_name = map[int32]string{
+	0: "ROLE_USER",
+	1: "ROLE_CONTENT_ADMIN",
+	2: "ROLE_ADMIN",
+}
+var User_Role_value = map[string]int32{
+	"ROLE_USER":          0,
+	"ROLE_CONTENT_ADMIN": 1,
+	"ROLE_ADMIN":         2,
+}
+
+func (x User_Role) String() string {
+	return proto.EnumName(User_Role_name, int32(x))
+}
+func (User_Role) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_models_9d102ea8f4d57b3f, []int{0, 0}
+}
+
 type User struct {
-	ID                   uint32        `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	CreatedAt            uint32        `protobuf:"varint,2,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
-	UpdatedAt            uint32        `protobuf:"varint,3,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
-	Name                 string        `protobuf:"bytes,4,opt,name=Name,proto3" json:"Name,omitempty"`
-	Phone                string        `protobuf:"bytes,5,opt,name=Phone,proto3" json:"Phone,omitempty"`
-	Address              *Address      `protobuf:"bytes,6,opt,name=Address,proto3" json:"Address,omitempty"`
-	AddressID            uint32        `protobuf:"varint,7,opt,name=AddressID,proto3" json:"AddressID,omitempty"`
-	CreditCards          []*CreditCard `protobuf:"bytes,8,rep,name=CreditCards,proto3" json:"CreditCards,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
-	XXX_unrecognized     []byte        `json:"-"`
-	XXX_sizecache        int32         `json:"-"`
+	ID        uint32 `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
+	CreatedAt uint32 `protobuf:"varint,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt uint32 `protobuf:"varint,3,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	FirstName string `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName  string `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	// @inject_tag: gorm:"unique;not null"
+	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty" gorm:"unique;not null"`
+	// @inject_tag: json:"-"
+	Password string `protobuf:"bytes,7,opt,name=password,proto3" json:"-"`
+	// @inject_tag: json:"role"
+	Role                 User_Role `protobuf:"varint,8,opt,name=role,proto3,enum=models.User_Role" json:"role"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_models_51de2e1d28a81cfe, []int{0}
+	return fileDescriptor_models_9d102ea8f4d57b3f, []int{0}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -77,206 +106,64 @@ func (m *User) GetUpdatedAt() uint32 {
 	return 0
 }
 
-func (m *User) GetName() string {
+func (m *User) GetFirstName() string {
 	if m != nil {
-		return m.Name
+		return m.FirstName
 	}
 	return ""
 }
 
-func (m *User) GetPhone() string {
+func (m *User) GetLastName() string {
 	if m != nil {
-		return m.Phone
+		return m.LastName
 	}
 	return ""
 }
 
-func (m *User) GetAddress() *Address {
+func (m *User) GetUsername() string {
 	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-func (m *User) GetAddressID() uint32 {
-	if m != nil {
-		return m.AddressID
-	}
-	return 0
-}
-
-func (m *User) GetCreditCards() []*CreditCard {
-	if m != nil {
-		return m.CreditCards
-	}
-	return nil
-}
-
-type Address struct {
-	ID                   uint32   `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	CreatedAt            uint32   `protobuf:"varint,2,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
-	UpdatedAt            uint32   `protobuf:"varint,3,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
-	Street               string   `protobuf:"bytes,4,opt,name=street,proto3" json:"street,omitempty"`
-	City                 string   `protobuf:"bytes,5,opt,name=city,proto3" json:"city,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *Address) Reset()         { *m = Address{} }
-func (m *Address) String() string { return proto.CompactTextString(m) }
-func (*Address) ProtoMessage()    {}
-func (*Address) Descriptor() ([]byte, []int) {
-	return fileDescriptor_models_51de2e1d28a81cfe, []int{1}
-}
-func (m *Address) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Address.Unmarshal(m, b)
-}
-func (m *Address) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Address.Marshal(b, m, deterministic)
-}
-func (dst *Address) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Address.Merge(dst, src)
-}
-func (m *Address) XXX_Size() int {
-	return xxx_messageInfo_Address.Size(m)
-}
-func (m *Address) XXX_DiscardUnknown() {
-	xxx_messageInfo_Address.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Address proto.InternalMessageInfo
-
-func (m *Address) GetID() uint32 {
-	if m != nil {
-		return m.ID
-	}
-	return 0
-}
-
-func (m *Address) GetCreatedAt() uint32 {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return 0
-}
-
-func (m *Address) GetUpdatedAt() uint32 {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return 0
-}
-
-func (m *Address) GetStreet() string {
-	if m != nil {
-		return m.Street
+		return m.Username
 	}
 	return ""
 }
 
-func (m *Address) GetCity() string {
+func (m *User) GetPassword() string {
 	if m != nil {
-		return m.City
+		return m.Password
 	}
 	return ""
 }
 
-type CreditCard struct {
-	ID                   uint32   `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	CreatedAt            uint32   `protobuf:"varint,2,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
-	UpdatedAt            uint32   `protobuf:"varint,3,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
-	Number               uint32   `protobuf:"varint,4,opt,name=number,proto3" json:"number,omitempty"`
-	UserID               uint32   `protobuf:"varint,5,opt,name=UserID,proto3" json:"UserID,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *CreditCard) Reset()         { *m = CreditCard{} }
-func (m *CreditCard) String() string { return proto.CompactTextString(m) }
-func (*CreditCard) ProtoMessage()    {}
-func (*CreditCard) Descriptor() ([]byte, []int) {
-	return fileDescriptor_models_51de2e1d28a81cfe, []int{2}
-}
-func (m *CreditCard) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CreditCard.Unmarshal(m, b)
-}
-func (m *CreditCard) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CreditCard.Marshal(b, m, deterministic)
-}
-func (dst *CreditCard) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CreditCard.Merge(dst, src)
-}
-func (m *CreditCard) XXX_Size() int {
-	return xxx_messageInfo_CreditCard.Size(m)
-}
-func (m *CreditCard) XXX_DiscardUnknown() {
-	xxx_messageInfo_CreditCard.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_CreditCard proto.InternalMessageInfo
-
-func (m *CreditCard) GetID() uint32 {
+func (m *User) GetRole() User_Role {
 	if m != nil {
-		return m.ID
+		return m.Role
 	}
-	return 0
-}
-
-func (m *CreditCard) GetCreatedAt() uint32 {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return 0
-}
-
-func (m *CreditCard) GetUpdatedAt() uint32 {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return 0
-}
-
-func (m *CreditCard) GetNumber() uint32 {
-	if m != nil {
-		return m.Number
-	}
-	return 0
-}
-
-func (m *CreditCard) GetUserID() uint32 {
-	if m != nil {
-		return m.UserID
-	}
-	return 0
+	return User_ROLE_USER
 }
 
 func init() {
 	proto.RegisterType((*User)(nil), "models.User")
-	proto.RegisterType((*Address)(nil), "models.Address")
-	proto.RegisterType((*CreditCard)(nil), "models.CreditCard")
+	proto.RegisterEnum("models.User_Role", User_Role_name, User_Role_value)
 }
 
-func init() { proto.RegisterFile("models.proto", fileDescriptor_models_51de2e1d28a81cfe) }
+func init() { proto.RegisterFile("models.proto", fileDescriptor_models_9d102ea8f4d57b3f) }
 
-var fileDescriptor_models_51de2e1d28a81cfe = []byte{
-	// 264 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x92, 0xb1, 0x4e, 0xc3, 0x30,
-	0x10, 0x86, 0xe5, 0x34, 0x4d, 0xe9, 0x85, 0x80, 0x74, 0x42, 0xc8, 0x03, 0x43, 0x94, 0x29, 0x2c,
-	0x1d, 0x0a, 0x2f, 0x50, 0x25, 0x4b, 0x16, 0x84, 0x2c, 0xf5, 0x01, 0x52, 0x7c, 0x12, 0x95, 0x48,
-	0x53, 0xd9, 0x66, 0x60, 0x64, 0xe3, 0x9d, 0x59, 0x90, 0x9d, 0x6b, 0xc2, 0x03, 0x64, 0xbb, 0xff,
-	0xfb, 0x2d, 0xdf, 0xaf, 0xdf, 0x86, 0xeb, 0xae, 0xd7, 0xf4, 0x61, 0x37, 0x67, 0xd3, 0xbb, 0x1e,
-	0x93, 0x41, 0x15, 0xbf, 0x02, 0xe2, 0xbd, 0x25, 0x83, 0x37, 0x10, 0x35, 0xb5, 0x14, 0xb9, 0x28,
-	0x33, 0x15, 0x35, 0x35, 0x3e, 0xc0, 0xba, 0x32, 0xd4, 0x3a, 0xd2, 0x3b, 0x27, 0xa3, 0x80, 0x27,
-	0xe0, 0xdd, 0xfd, 0x59, 0xb3, 0xbb, 0x18, 0xdc, 0x11, 0x20, 0x42, 0xfc, 0xd2, 0x76, 0x24, 0xe3,
-	0x5c, 0x94, 0x6b, 0x15, 0x66, 0xbc, 0x83, 0xe5, 0xeb, 0x7b, 0x7f, 0x22, 0xb9, 0x0c, 0x70, 0x10,
-	0xf8, 0x08, 0xab, 0x9d, 0xd6, 0x86, 0xac, 0x95, 0x49, 0x2e, 0xca, 0x74, 0x7b, 0xbb, 0xe1, 0x98,
-	0x8c, 0xd5, 0xc5, 0xf7, 0x2b, 0x79, 0x6c, 0x6a, 0xb9, 0x1a, 0x56, 0x8e, 0x00, 0x9f, 0x21, 0xad,
-	0x0c, 0xe9, 0xa3, 0xab, 0x5a, 0xa3, 0xad, 0xbc, 0xca, 0x17, 0x65, 0xba, 0xc5, 0xcb, 0x65, 0x93,
-	0xa5, 0xfe, 0x1f, 0x2b, 0xbe, 0xc5, 0xb8, 0x7f, 0xd6, 0x02, 0xee, 0x21, 0xb1, 0xce, 0x10, 0x39,
-	0xae, 0x80, 0x95, 0x2f, 0xe6, 0xed, 0xe8, 0xbe, 0xb8, 0x83, 0x30, 0x17, 0x3f, 0x02, 0x60, 0xca,
-	0x34, 0x77, 0x8c, 0xd3, 0x67, 0x77, 0x20, 0x13, 0x62, 0x64, 0x8a, 0x95, 0xe7, 0xfe, 0xcd, 0x9b,
-	0x3a, 0x04, 0xc9, 0x14, 0xab, 0x43, 0x12, 0xfe, 0xc6, 0xd3, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff,
-	0x79, 0x77, 0xf7, 0xd2, 0x2b, 0x02, 0x00, 0x00,
+var fileDescriptor_models_9d102ea8f4d57b3f = []byte{
+	// 243 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x34, 0xd0, 0xb1, 0x4b, 0xc4, 0x30,
+	0x14, 0xc7, 0x71, 0x13, 0xeb, 0xd9, 0x3c, 0xbc, 0x72, 0x66, 0x90, 0xa0, 0x08, 0xe5, 0x40, 0xe8,
+	0xd4, 0x41, 0x67, 0x87, 0xc3, 0x76, 0x28, 0x68, 0x0f, 0xe2, 0xdd, 0x5c, 0xa2, 0x8d, 0x20, 0xb4,
+	0xa6, 0x24, 0x39, 0xfc, 0xaf, 0xfc, 0x1b, 0x25, 0x2f, 0xed, 0xf8, 0xfb, 0x7e, 0xa6, 0xf7, 0xe0,
+	0x6a, 0x34, 0xbd, 0x1e, 0x5c, 0x39, 0x59, 0xe3, 0x0d, 0x5f, 0xc5, 0xb5, 0xfd, 0xa3, 0x90, 0x1c,
+	0x9d, 0xb6, 0x3c, 0x03, 0xda, 0x54, 0x82, 0xe4, 0xa4, 0x58, 0x4b, 0xda, 0x54, 0xfc, 0x1e, 0xe0,
+	0xd3, 0x6a, 0xe5, 0x75, 0xdf, 0x29, 0x2f, 0x28, 0x76, 0x36, 0x97, 0x9d, 0x0f, 0x7c, 0x9a, 0xfa,
+	0x85, 0xcf, 0x23, 0xcf, 0x25, 0xf2, 0xd7, 0xb7, 0x75, 0xbe, 0xfb, 0x51, 0xa3, 0x16, 0x49, 0x4e,
+	0x0a, 0x26, 0x19, 0x96, 0x56, 0x8d, 0x9a, 0xdf, 0x01, 0x1b, 0xd4, 0xa2, 0x17, 0xa8, 0x69, 0x08,
+	0x88, 0xb7, 0x90, 0x9e, 0x9c, 0xb6, 0x68, 0xab, 0x68, 0xcb, 0x0e, 0x36, 0x29, 0xe7, 0x7e, 0x8d,
+	0xed, 0xc5, 0x65, 0xb4, 0x65, 0xf3, 0x07, 0x48, 0xac, 0x19, 0xb4, 0x48, 0x73, 0x52, 0x64, 0x8f,
+	0xd7, 0xe5, 0x7c, 0x6f, 0xb8, 0xae, 0x94, 0x66, 0xd0, 0x12, 0x79, 0xfb, 0x0c, 0x49, 0x58, 0x7c,
+	0x0d, 0x4c, 0xee, 0x5f, 0xeb, 0xee, 0xf8, 0x5e, 0xcb, 0xcd, 0x19, 0xbf, 0x01, 0x8e, 0xf3, 0x65,
+	0xdf, 0x1e, 0xea, 0xf6, 0xd0, 0xed, 0xaa, 0xb7, 0xa6, 0xdd, 0x10, 0x9e, 0x01, 0x60, 0x8f, 0x9b,
+	0x7e, 0xac, 0xf0, 0x7f, 0x4f, 0xff, 0x01, 0x00, 0x00, 0xff, 0xff, 0xd0, 0x59, 0x25, 0xf8, 0x4f,
+	0x01, 0x00, 0x00,
 }

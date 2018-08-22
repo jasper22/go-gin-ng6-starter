@@ -75,6 +75,7 @@ and for the Go protocol buffers plugin:
 
 ```sh
 $ go get -u github.com/golang/protobuf/protoc-gen-go
+$ go get -u github.com/favadi/protoc-go-inject-tag
 ```
 
 The compiler plugin `protoc-gen-go` will be installed in `$GOBIN`, defaulting to `$GOPATH/bin`. 
