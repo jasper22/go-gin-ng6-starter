@@ -1,0 +1,16 @@
+language: go
+
+go:
+  - 1.10.3
+
+install: true
+
+notifications:
+  email: false
+
+before_script:
+  - go get -u github.com/kardianos/govendor
+  - govendor sync
+
+script:
+  - go test -v ./...
