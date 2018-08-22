@@ -5,6 +5,9 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JsonInterceptor} from "./shared/json.interceptor";
 import {SocketService} from "./shared/socket.service";
+import {AuthService} from "./shared/auth.service";
+import {RouterModule} from "@angular/router";
+import {ROUTES} from "./app.routes";
 
 @NgModule({
     declarations: [
@@ -12,9 +15,14 @@ import {SocketService} from "./shared/socket.service";
     ],
     imports: [
         BrowserModule,
-        HttpClientModule
+        HttpClientModule,
+        RouterModule.forRoot(ROUTES)
+    ],
+    exports: [
+        RouterModule
     ],
     providers: [
+        AuthService,
         SocketService,
         {provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true}
     ],
