@@ -25,13 +25,13 @@ $root.models = (function() {
          * @memberof models
          * @interface IUser
          * @property {number|null} [ID] User ID
-         * @property {number|null} [CreatedAt] User CreatedAt
-         * @property {number|null} [UpdatedAt] User UpdatedAt
-         * @property {string|null} [FirstName] User FirstName
-         * @property {string|null} [LastName] User LastName
-         * @property {string|null} [Username] User Username
-         * @property {string|null} [Password] User Password
-         * @property {models.User.AuthRole|null} [Role] User Role
+         * @property {number|null} [createdAt] User createdAt
+         * @property {number|null} [updatedAt] User updatedAt
+         * @property {string|null} [firstName] User firstName
+         * @property {string|null} [lastName] User lastName
+         * @property {string|null} [username] User username
+         * @property {string|null} [password] User password
+         * @property {models.User.Role|null} [role] User role
          */
 
         /**
@@ -58,60 +58,60 @@ $root.models = (function() {
         User.prototype.ID = 0;
 
         /**
-         * User CreatedAt.
-         * @member {number} CreatedAt
+         * User createdAt.
+         * @member {number} createdAt
          * @memberof models.User
          * @instance
          */
-        User.prototype.CreatedAt = 0;
+        User.prototype.createdAt = 0;
 
         /**
-         * User UpdatedAt.
-         * @member {number} UpdatedAt
+         * User updatedAt.
+         * @member {number} updatedAt
          * @memberof models.User
          * @instance
          */
-        User.prototype.UpdatedAt = 0;
+        User.prototype.updatedAt = 0;
 
         /**
-         * User FirstName.
-         * @member {string} FirstName
+         * User firstName.
+         * @member {string} firstName
          * @memberof models.User
          * @instance
          */
-        User.prototype.FirstName = "";
+        User.prototype.firstName = "";
 
         /**
-         * User LastName.
-         * @member {string} LastName
+         * User lastName.
+         * @member {string} lastName
          * @memberof models.User
          * @instance
          */
-        User.prototype.LastName = "";
+        User.prototype.lastName = "";
 
         /**
-         * User Username.
-         * @member {string} Username
+         * User username.
+         * @member {string} username
          * @memberof models.User
          * @instance
          */
-        User.prototype.Username = "";
+        User.prototype.username = "";
 
         /**
-         * User Password.
-         * @member {string} Password
+         * User password.
+         * @member {string} password
          * @memberof models.User
          * @instance
          */
-        User.prototype.Password = "";
+        User.prototype.password = "";
 
         /**
-         * User Role.
-         * @member {models.User.AuthRole} Role
+         * User role.
+         * @member {models.User.Role} role
          * @memberof models.User
          * @instance
          */
-        User.prototype.Role = 0;
+        User.prototype.role = 0;
 
         /**
          * Creates a new User instance using the specified properties.
@@ -139,20 +139,20 @@ $root.models = (function() {
                 writer = $Writer.create();
             if (message.ID != null && message.hasOwnProperty("ID"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.ID);
-            if (message.CreatedAt != null && message.hasOwnProperty("CreatedAt"))
-                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.CreatedAt);
-            if (message.UpdatedAt != null && message.hasOwnProperty("UpdatedAt"))
-                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.UpdatedAt);
-            if (message.FirstName != null && message.hasOwnProperty("FirstName"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.FirstName);
-            if (message.LastName != null && message.hasOwnProperty("LastName"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.LastName);
-            if (message.Username != null && message.hasOwnProperty("Username"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.Username);
-            if (message.Password != null && message.hasOwnProperty("Password"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.Password);
-            if (message.Role != null && message.hasOwnProperty("Role"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.Role);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.createdAt);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.updatedAt);
+            if (message.firstName != null && message.hasOwnProperty("firstName"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.firstName);
+            if (message.lastName != null && message.hasOwnProperty("lastName"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.lastName);
+            if (message.username != null && message.hasOwnProperty("username"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.username);
+            if (message.password != null && message.hasOwnProperty("password"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.password);
+            if (message.role != null && message.hasOwnProperty("role"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.role);
             return writer;
         };
 
@@ -191,25 +191,25 @@ $root.models = (function() {
                     message.ID = reader.uint32();
                     break;
                 case 2:
-                    message.CreatedAt = reader.uint32();
+                    message.createdAt = reader.uint32();
                     break;
                 case 3:
-                    message.UpdatedAt = reader.uint32();
+                    message.updatedAt = reader.uint32();
                     break;
                 case 4:
-                    message.FirstName = reader.string();
+                    message.firstName = reader.string();
                     break;
                 case 5:
-                    message.LastName = reader.string();
+                    message.lastName = reader.string();
                     break;
                 case 6:
-                    message.Username = reader.string();
+                    message.username = reader.string();
                     break;
                 case 7:
-                    message.Password = reader.string();
+                    message.password = reader.string();
                     break;
                 case 8:
-                    message.Role = reader.int32();
+                    message.role = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -249,28 +249,28 @@ $root.models = (function() {
             if (message.ID != null && message.hasOwnProperty("ID"))
                 if (!$util.isInteger(message.ID))
                     return "ID: integer expected";
-            if (message.CreatedAt != null && message.hasOwnProperty("CreatedAt"))
-                if (!$util.isInteger(message.CreatedAt))
-                    return "CreatedAt: integer expected";
-            if (message.UpdatedAt != null && message.hasOwnProperty("UpdatedAt"))
-                if (!$util.isInteger(message.UpdatedAt))
-                    return "UpdatedAt: integer expected";
-            if (message.FirstName != null && message.hasOwnProperty("FirstName"))
-                if (!$util.isString(message.FirstName))
-                    return "FirstName: string expected";
-            if (message.LastName != null && message.hasOwnProperty("LastName"))
-                if (!$util.isString(message.LastName))
-                    return "LastName: string expected";
-            if (message.Username != null && message.hasOwnProperty("Username"))
-                if (!$util.isString(message.Username))
-                    return "Username: string expected";
-            if (message.Password != null && message.hasOwnProperty("Password"))
-                if (!$util.isString(message.Password))
-                    return "Password: string expected";
-            if (message.Role != null && message.hasOwnProperty("Role"))
-                switch (message.Role) {
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                if (!$util.isInteger(message.createdAt))
+                    return "createdAt: integer expected";
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                if (!$util.isInteger(message.updatedAt))
+                    return "updatedAt: integer expected";
+            if (message.firstName != null && message.hasOwnProperty("firstName"))
+                if (!$util.isString(message.firstName))
+                    return "firstName: string expected";
+            if (message.lastName != null && message.hasOwnProperty("lastName"))
+                if (!$util.isString(message.lastName))
+                    return "lastName: string expected";
+            if (message.username != null && message.hasOwnProperty("username"))
+                if (!$util.isString(message.username))
+                    return "username: string expected";
+            if (message.password != null && message.hasOwnProperty("password"))
+                if (!$util.isString(message.password))
+                    return "password: string expected";
+            if (message.role != null && message.hasOwnProperty("role"))
+                switch (message.role) {
                 default:
-                    return "Role: enum value expected";
+                    return "role: enum value expected";
                 case 0:
                 case 1:
                 case 2:
@@ -293,30 +293,30 @@ $root.models = (function() {
             var message = new $root.models.User();
             if (object.ID != null)
                 message.ID = object.ID >>> 0;
-            if (object.CreatedAt != null)
-                message.CreatedAt = object.CreatedAt >>> 0;
-            if (object.UpdatedAt != null)
-                message.UpdatedAt = object.UpdatedAt >>> 0;
-            if (object.FirstName != null)
-                message.FirstName = String(object.FirstName);
-            if (object.LastName != null)
-                message.LastName = String(object.LastName);
-            if (object.Username != null)
-                message.Username = String(object.Username);
-            if (object.Password != null)
-                message.Password = String(object.Password);
-            switch (object.Role) {
+            if (object.createdAt != null)
+                message.createdAt = object.createdAt >>> 0;
+            if (object.updatedAt != null)
+                message.updatedAt = object.updatedAt >>> 0;
+            if (object.firstName != null)
+                message.firstName = String(object.firstName);
+            if (object.lastName != null)
+                message.lastName = String(object.lastName);
+            if (object.username != null)
+                message.username = String(object.username);
+            if (object.password != null)
+                message.password = String(object.password);
+            switch (object.role) {
             case "ROLE_USER":
             case 0:
-                message.Role = 0;
+                message.role = 0;
                 break;
             case "ROLE_CONTENT_ADMIN":
             case 1:
-                message.Role = 1;
+                message.role = 1;
                 break;
             case "ROLE_ADMIN":
             case 2:
-                message.Role = 2;
+                message.role = 2;
                 break;
             }
             return message;
@@ -337,30 +337,30 @@ $root.models = (function() {
             var object = {};
             if (options.defaults) {
                 object.ID = 0;
-                object.CreatedAt = 0;
-                object.UpdatedAt = 0;
-                object.FirstName = "";
-                object.LastName = "";
-                object.Username = "";
-                object.Password = "";
-                object.Role = options.enums === String ? "ROLE_USER" : 0;
+                object.createdAt = 0;
+                object.updatedAt = 0;
+                object.firstName = "";
+                object.lastName = "";
+                object.username = "";
+                object.password = "";
+                object.role = options.enums === String ? "ROLE_USER" : 0;
             }
             if (message.ID != null && message.hasOwnProperty("ID"))
                 object.ID = message.ID;
-            if (message.CreatedAt != null && message.hasOwnProperty("CreatedAt"))
-                object.CreatedAt = message.CreatedAt;
-            if (message.UpdatedAt != null && message.hasOwnProperty("UpdatedAt"))
-                object.UpdatedAt = message.UpdatedAt;
-            if (message.FirstName != null && message.hasOwnProperty("FirstName"))
-                object.FirstName = message.FirstName;
-            if (message.LastName != null && message.hasOwnProperty("LastName"))
-                object.LastName = message.LastName;
-            if (message.Username != null && message.hasOwnProperty("Username"))
-                object.Username = message.Username;
-            if (message.Password != null && message.hasOwnProperty("Password"))
-                object.Password = message.Password;
-            if (message.Role != null && message.hasOwnProperty("Role"))
-                object.Role = options.enums === String ? $root.models.User.AuthRole[message.Role] : message.Role;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = message.createdAt;
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                object.updatedAt = message.updatedAt;
+            if (message.firstName != null && message.hasOwnProperty("firstName"))
+                object.firstName = message.firstName;
+            if (message.lastName != null && message.hasOwnProperty("lastName"))
+                object.lastName = message.lastName;
+            if (message.username != null && message.hasOwnProperty("username"))
+                object.username = message.username;
+            if (message.password != null && message.hasOwnProperty("password"))
+                object.password = message.password;
+            if (message.role != null && message.hasOwnProperty("role"))
+                object.role = options.enums === String ? $root.models.User.Role[message.role] : message.role;
             return object;
         };
 
@@ -376,14 +376,14 @@ $root.models = (function() {
         };
 
         /**
-         * AuthRole enum.
-         * @name models.User.AuthRole
+         * Role enum.
+         * @name models.User.Role
          * @enum {string}
          * @property {number} ROLE_USER=0 ROLE_USER value
          * @property {number} ROLE_CONTENT_ADMIN=1 ROLE_CONTENT_ADMIN value
          * @property {number} ROLE_ADMIN=2 ROLE_ADMIN value
          */
-        User.AuthRole = (function() {
+        User.Role = (function() {
             var valuesById = {}, values = Object.create(valuesById);
             values[valuesById[0] = "ROLE_USER"] = 0;
             values[valuesById[1] = "ROLE_CONTENT_ADMIN"] = 1;

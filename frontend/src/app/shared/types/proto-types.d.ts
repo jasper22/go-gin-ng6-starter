@@ -8,26 +8,26 @@ export namespace models {
         /** User ID */
         ID?: (number|null);
 
-        /** User CreatedAt */
-        CreatedAt?: (number|null);
+        /** User createdAt */
+        createdAt?: (number|null);
 
-        /** User UpdatedAt */
-        UpdatedAt?: (number|null);
+        /** User updatedAt */
+        updatedAt?: (number|null);
 
-        /** User FirstName */
-        FirstName?: (string|null);
+        /** User firstName */
+        firstName?: (string|null);
 
-        /** User LastName */
-        LastName?: (string|null);
+        /** User lastName */
+        lastName?: (string|null);
 
-        /** User Username */
-        Username?: (string|null);
+        /** User username */
+        username?: (string|null);
 
-        /** User Password */
-        Password?: (string|null);
+        /** User password */
+        password?: (string|null);
 
-        /** User Role */
-        Role?: (models.User.AuthRole|null);
+        /** User role */
+        role?: (models.User.Role|null);
     }
 
     /** Represents a User. */
@@ -42,26 +42,26 @@ export namespace models {
         /** User ID. */
         public ID: number;
 
-        /** User CreatedAt. */
-        public CreatedAt: number;
+        /** User createdAt. */
+        public createdAt: number;
 
-        /** User UpdatedAt. */
-        public UpdatedAt: number;
+        /** User updatedAt. */
+        public updatedAt: number;
 
-        /** User FirstName. */
-        public FirstName: string;
+        /** User firstName. */
+        public firstName: string;
 
-        /** User LastName. */
-        public LastName: string;
+        /** User lastName. */
+        public lastName: string;
 
-        /** User Username. */
-        public Username: string;
+        /** User username. */
+        public username: string;
 
-        /** User Password. */
-        public Password: string;
+        /** User password. */
+        public password: string;
 
-        /** User Role. */
-        public Role: models.User.AuthRole;
+        /** User role. */
+        public role: models.User.Role;
 
         /**
          * Creates a new User instance using the specified properties.
@@ -136,8 +136,8 @@ export namespace models {
 
     namespace User {
 
-        /** AuthRole enum. */
-        enum AuthRole {
+        /** Role enum. */
+        enum Role {
             ROLE_USER = 0,
             ROLE_CONTENT_ADMIN = 1,
             ROLE_ADMIN = 2

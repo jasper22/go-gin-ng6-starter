@@ -108,6 +108,6 @@ func payload(data interface{}) jwt.MapClaims {
     }
 }
 
-func hasRole(role int32, desiredRole models.User_AuthRole) bool {
+func hasRole(role int32, desiredRole models.User_Role) bool {
     return role >= int32(desiredRole)
 }
