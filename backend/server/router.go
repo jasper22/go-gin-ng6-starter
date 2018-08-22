@@ -4,6 +4,7 @@ import (
     "github.com/gin-gonic/gin"
     "github.com/app8izer/go-gin-ng6-starter/backend/controllers"
     "github.com/app8izer/go-gin-ng6-starter/backend/middlewares"
+    "github.com/gin-contrib/static"
 )
 
 func SetupRouter() *gin.Engine {
@@ -11,6 +12,7 @@ func SetupRouter() *gin.Engine {
 
     // init authMiddleware
     authMiddleware := middlewares.GetAuthMiddleware()
+    r.Use(static.Serve("/", static.LocalFile("./frontend/dist", true)))
 
     public := r.Group("api/public")
     {
@@ -19,7 +21,6 @@ func SetupRouter() *gin.Engine {
 
     secure := r.Group("api/secure")
     {
-
         secure.Use(authMiddleware.MiddlewareFunc())
         controllers.UserController(secure)
         controllers.SocketController(secure, SocketServer)
@@ -30,8 +31,11 @@ func SetupRouter() *gin.Engine {
         admin.Use(authMiddleware.MiddlewareFunc())
         admin.Use(authMiddleware.AdminMiddleware)
         controllers.AdminController(admin)
-
     }
+
+    r.NoRoute(func(c *gin.Context) {
+        c.Redirect(301, "/")
+    })
 
     return r
 }

@@ -9,7 +9,7 @@ import User = models.User;
 @Injectable()
 export class AuthService {
     public token: string;
-    private baseUrl = 'api/public/auth/login';
+    private baseUrl = 'api/public/auth';
     private currentUser$: ReplaySubject<User> = new ReplaySubject<User>(1);
 
     constructor(private http: HttpClient,
