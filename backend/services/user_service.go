@@ -53,6 +53,7 @@ func (us *UserService) Create(user *models.User) (*models.User) {
     }
 
     user.Password = hash
+    user.Role = models.User_ROLE_USER
 
     return us.userRepository.Create(user)
 }

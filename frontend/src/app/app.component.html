@@ -1,3 +1,30 @@
-<button (click)="login()">
-    Login
-</button>
+<div>
+    <label>Username:</label>
+    <input type="text" [(ngModel)]="username" name="username">
+    <label>Password:</label>
+    <input type="text" [(ngModel)]="password" name="password">
+    <button (click)="login()">
+        Login
+    </button>
+</div>
+<div>
+    <button (click)="logout()">
+        Logout
+    </button>
+</div>
+
+
+<ul>
+    <li *ngFor="let user of users">Username: {{user.username}} Role: {{user.role}}</li>
+</ul>
+
+<div>
+    Add User:
+    <input type="text" [(ngModel)]="new_username" placeholder="Username" name="new_username">
+    <input type="text" [(ngModel)]="new_password" placeholder="Password" name="new_password">
+    <button (click)="createUser()">
+        Add New User
+    </button>
+</div>
+
+

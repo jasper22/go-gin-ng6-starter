@@ -8,7 +8,7 @@ export class SocketService {
     private socket: any;
 
     constructor() {
-       // this.connect();
+        this.connect();
     }
 
     connect() {

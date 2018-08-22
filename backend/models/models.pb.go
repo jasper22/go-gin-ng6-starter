@@ -51,9 +51,9 @@ type User struct {
 	FirstName string `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	LastName  string `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
 	// @inject_tag: gorm:"unique;not null"
-	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty" gorm:"unique;not null"`
+	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
 	// @inject_tag: json:"-"
-	Password             string    `protobuf:"bytes,7,opt,name=password,proto3" json:"-"`
+	Password             string    `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
 	Role                 User_Role `protobuf:"varint,8,opt,name=role,proto3,enum=models.User_Role" json:"role,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`

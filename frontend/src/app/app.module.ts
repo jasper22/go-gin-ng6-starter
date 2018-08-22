@@ -8,6 +8,8 @@ import {SocketService} from "./shared/socket.service";
 import {AuthService} from "./shared/auth.service";
 import {RouterModule} from "@angular/router";
 import {ROUTES} from "./app.routes";
+import {JwtInterceptor} from "./shared/jwt.interceptor";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -16,6 +18,7 @@ import {ROUTES} from "./app.routes";
     imports: [
         BrowserModule,
         HttpClientModule,
+        FormsModule,
         RouterModule.forRoot(ROUTES)
     ],
     exports: [
@@ -24,7 +27,8 @@ import {ROUTES} from "./app.routes";
     providers: [
         AuthService,
         SocketService,
-        {provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true}
+        {provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
 })

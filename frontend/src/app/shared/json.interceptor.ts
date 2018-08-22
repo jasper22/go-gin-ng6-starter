@@ -6,9 +6,9 @@ import {
     HttpInterceptor,
     HttpRequest,
     HttpResponse
-} from "@angular/common/http";
-import {Observable} from "rxjs/internal/Observable";
-import {map} from "rxjs/operators";
+} from '@angular/common/http';
+import {Observable} from 'rxjs/internal/Observable';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class JsonInterceptor implements HttpInterceptor {
@@ -20,7 +20,7 @@ export class JsonInterceptor implements HttpInterceptor {
         return next.handle(req)
             .pipe(
                 map((event: HttpEvent<any>) => {
-                    if (event instanceof HttpResponse && event.url.match("/api/")) {
+                    if (event instanceof HttpResponse && (event.url.match('/api/secure') || event.url.match('/api/admin'))) {
                         return event.clone({body: JSON.parse(event.body)});
                     }
                     return event;
