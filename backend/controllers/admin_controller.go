@@ -19,6 +19,7 @@ func AdminController(r *gin.RouterGroup) {
 func CreateUser(c *gin.Context) {
     user := models.User{}
     if err := c.ShouldBind(&user); err == nil {
+        user.Role = models.User_ROLE_USER
         res, err := json.Marshal(userService.Create(&user))
         if err == nil {
             c.JSON(http.StatusOK, string(res))

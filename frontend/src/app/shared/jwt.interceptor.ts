@@ -1,14 +1,11 @@
 import {Injectable} from '@angular/core';
 import {
-    HttpErrorResponse,
     HttpEvent,
     HttpHandler,
     HttpInterceptor,
     HttpRequest,
-    HttpResponse
 } from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
-import {map} from "rxjs/operators";
 import {AuthService} from "./auth.service";
 
 @Injectable()

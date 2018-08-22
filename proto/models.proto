@@ -16,5 +16,6 @@ message User {
         ROLE_CONTENT_ADMIN = 1;
         ROLE_ADMIN = 2;
     }
+    // @inject_tag: json:"role"
     Role role = 8;
 }

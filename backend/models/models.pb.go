@@ -41,7 +41,7 @@ func (x User_Role) String() string {
 	return proto.EnumName(User_Role_name, int32(x))
 }
 func (User_Role) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_models_a8c98d5d25671463, []int{0, 0}
+	return fileDescriptor_models_9d102ea8f4d57b3f, []int{0, 0}
 }
 
 type User struct {
@@ -51,10 +51,11 @@ type User struct {
 	FirstName string `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
 	LastName  string `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
 	// @inject_tag: gorm:"unique;not null"
-	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
+	Username string `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty" gorm:"unique;not null"`
 	// @inject_tag: json:"-"
-	Password             string    `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
-	Role                 User_Role `protobuf:"varint,8,opt,name=role,proto3,enum=models.User_Role" json:"role,omitempty"`
+	Password string `protobuf:"bytes,7,opt,name=password,proto3" json:"-"`
+	// @inject_tag: json:"role"
+	Role                 User_Role `protobuf:"varint,8,opt,name=role,proto3,enum=models.User_Role" json:"role"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -64,7 +65,7 @@ func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_models_a8c98d5d25671463, []int{0}
+	return fileDescriptor_models_9d102ea8f4d57b3f, []int{0}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -145,9 +146,9 @@ func init() {
 	proto.RegisterEnum("models.User_Role", User_Role_name, User_Role_value)
 }
 
-func init() { proto.RegisterFile("models.proto", fileDescriptor_models_a8c98d5d25671463) }
+func init() { proto.RegisterFile("models.proto", fileDescriptor_models_9d102ea8f4d57b3f) }
 
-var fileDescriptor_models_a8c98d5d25671463 = []byte{
+var fileDescriptor_models_9d102ea8f4d57b3f = []byte{
 	// 243 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x34, 0xd0, 0xb1, 0x4b, 0xc4, 0x30,
 	0x14, 0xc7, 0x71, 0x13, 0xeb, 0xd9, 0x3c, 0xbc, 0x72, 0x66, 0x90, 0xa0, 0x08, 0xe5, 0x40, 0xe8,

@@ -15,8 +15,8 @@ export class AppComponent {
     public currentUser = null;
     public username = 'admin';
     public password = '1234';
-    public new_username = '';
-    public new_password = '';
+    public newUsername = '';
+    public newPassword = '';
 
     constructor(private http: HttpClient,
                 private socketService: SocketService,
@@ -63,11 +63,12 @@ export class AppComponent {
     }
 
     public createUser() {
+
         const user: User = new User({
-            username: this.new_username,
-            password: this.new_password,
+            username: this.newUsername,
+            password: this.newPassword,
         });
-        console.log(user);
+
         this.http.post("api/admin/user/", user)
             .subscribe((usr: User) => {
                 console.log(usr);
