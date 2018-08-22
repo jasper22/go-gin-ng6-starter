@@ -14,20 +14,20 @@ export namespace models {
         /** User UpdatedAt */
         UpdatedAt?: (number|null);
 
-        /** User Name */
-        Name?: (string|null);
+        /** User FirstName */
+        FirstName?: (string|null);
 
-        /** User Phone */
-        Phone?: (string|null);
+        /** User LastName */
+        LastName?: (string|null);
 
-        /** User Address */
-        Address?: (models.IAddress|null);
+        /** User Username */
+        Username?: (string|null);
 
-        /** User AddressID */
-        AddressID?: (number|null);
+        /** User Password */
+        Password?: (string|null);
 
-        /** User CreditCards */
-        CreditCards?: (models.ICreditCard[]|null);
+        /** User Role */
+        Role?: (models.User.AuthRole|null);
     }
 
     /** Represents a User. */
@@ -48,20 +48,20 @@ export namespace models {
         /** User UpdatedAt. */
         public UpdatedAt: number;
 
-        /** User Name. */
-        public Name: string;
+        /** User FirstName. */
+        public FirstName: string;
 
-        /** User Phone. */
-        public Phone: string;
+        /** User LastName. */
+        public LastName: string;
 
-        /** User Address. */
-        public Address?: (models.IAddress|null);
+        /** User Username. */
+        public Username: string;
 
-        /** User AddressID. */
-        public AddressID: number;
+        /** User Password. */
+        public Password: string;
 
-        /** User CreditCards. */
-        public CreditCards: models.ICreditCard[];
+        /** User Role. */
+        public Role: models.User.AuthRole;
 
         /**
          * Creates a new User instance using the specified properties.
@@ -134,231 +134,13 @@ export namespace models {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of an Address. */
-    interface IAddress {
+    namespace User {
 
-        /** Address ID */
-        ID?: (number|null);
-
-        /** Address CreatedAt */
-        CreatedAt?: (number|null);
-
-        /** Address UpdatedAt */
-        UpdatedAt?: (number|null);
-
-        /** Address street */
-        street?: (string|null);
-
-        /** Address city */
-        city?: (string|null);
-    }
-
-    /** Represents an Address. */
-    class Address implements IAddress {
-
-        /**
-         * Constructs a new Address.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: models.IAddress);
-
-        /** Address ID. */
-        public ID: number;
-
-        /** Address CreatedAt. */
-        public CreatedAt: number;
-
-        /** Address UpdatedAt. */
-        public UpdatedAt: number;
-
-        /** Address street. */
-        public street: string;
-
-        /** Address city. */
-        public city: string;
-
-        /**
-         * Creates a new Address instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Address instance
-         */
-        public static create(properties?: models.IAddress): models.Address;
-
-        /**
-         * Encodes the specified Address message. Does not implicitly {@link models.Address.verify|verify} messages.
-         * @param message Address message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: models.IAddress, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Address message, length delimited. Does not implicitly {@link models.Address.verify|verify} messages.
-         * @param message Address message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: models.IAddress, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes an Address message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns Address
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): models.Address;
-
-        /**
-         * Decodes an Address message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Address
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): models.Address;
-
-        /**
-         * Verifies an Address message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates an Address message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns Address
-         */
-        public static fromObject(object: { [k: string]: any }): models.Address;
-
-        /**
-         * Creates a plain object from an Address message. Also converts values to other types if specified.
-         * @param message Address
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: models.Address, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this Address to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a CreditCard. */
-    interface ICreditCard {
-
-        /** CreditCard ID */
-        ID?: (number|null);
-
-        /** CreditCard CreatedAt */
-        CreatedAt?: (number|null);
-
-        /** CreditCard UpdatedAt */
-        UpdatedAt?: (number|null);
-
-        /** CreditCard number */
-        number?: (number|null);
-
-        /** CreditCard UserID */
-        UserID?: (number|null);
-    }
-
-    /** Represents a CreditCard. */
-    class CreditCard implements ICreditCard {
-
-        /**
-         * Constructs a new CreditCard.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: models.ICreditCard);
-
-        /** CreditCard ID. */
-        public ID: number;
-
-        /** CreditCard CreatedAt. */
-        public CreatedAt: number;
-
-        /** CreditCard UpdatedAt. */
-        public UpdatedAt: number;
-
-        /** CreditCard number. */
-        public number: number;
-
-        /** CreditCard UserID. */
-        public UserID: number;
-
-        /**
-         * Creates a new CreditCard instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns CreditCard instance
-         */
-        public static create(properties?: models.ICreditCard): models.CreditCard;
-
-        /**
-         * Encodes the specified CreditCard message. Does not implicitly {@link models.CreditCard.verify|verify} messages.
-         * @param message CreditCard message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: models.ICreditCard, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified CreditCard message, length delimited. Does not implicitly {@link models.CreditCard.verify|verify} messages.
-         * @param message CreditCard message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: models.ICreditCard, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a CreditCard message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns CreditCard
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): models.CreditCard;
-
-        /**
-         * Decodes a CreditCard message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns CreditCard
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): models.CreditCard;
-
-        /**
-         * Verifies a CreditCard message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a CreditCard message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns CreditCard
-         */
-        public static fromObject(object: { [k: string]: any }): models.CreditCard;
-
-        /**
-         * Creates a plain object from a CreditCard message. Also converts values to other types if specified.
-         * @param message CreditCard
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: models.CreditCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this CreditCard to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
+        /** AuthRole enum. */
+        enum AuthRole {
+            ROLE_USER = 0,
+            ROLE_CONTENT_ADMIN = 1,
+            ROLE_ADMIN = 2
+        }
     }
 }

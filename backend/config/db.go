@@ -12,6 +12,7 @@ import (
 
 var db *gorm.DB //database
 
+
 func init() {
     var (
         username string
@@ -42,8 +43,9 @@ func init() {
     db = conn
     // Database migration
     db.Debug().AutoMigrate(&models.User{})
-    db.Debug().AutoMigrate(&models.Address{})
-    db.Debug().AutoMigrate(&models.CreditCard{})
+
+
+
 }
 
 //returns a handle to the DB object

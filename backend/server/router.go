@@ -24,5 +24,13 @@ func SetupRouter() *gin.Engine {
         controllers.UserController(secure)
     }
 
+    admin := r.Group("api/admin")
+    {
+        admin.Use(authMiddleware.MiddlewareFunc())
+        admin.Use(authMiddleware.AdminMiddleware)
+        controllers.AdminController(admin)
+
+    }
+
     return r
 }

@@ -18,15 +18,41 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+type User_AuthRole int32
+
+const (
+	User_ROLE_USER          User_AuthRole = 0
+	User_ROLE_CONTENT_ADMIN User_AuthRole = 1
+	User_ROLE_ADMIN         User_AuthRole = 2
+)
+
+var User_AuthRole_name = map[int32]string{
+	0: "ROLE_USER",
+	1: "ROLE_CONTENT_ADMIN",
+	2: "ROLE_ADMIN",
+}
+var User_AuthRole_value = map[string]int32{
+	"ROLE_USER":          0,
+	"ROLE_CONTENT_ADMIN": 1,
+	"ROLE_ADMIN":         2,
+}
+
+func (x User_AuthRole) String() string {
+	return proto.EnumName(User_AuthRole_name, int32(x))
+}
+func (User_AuthRole) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_models_21b25800083d68d8, []int{0, 0}
+}
+
 type User struct {
 	ID                   uint32        `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
 	CreatedAt            uint32        `protobuf:"varint,2,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
 	UpdatedAt            uint32        `protobuf:"varint,3,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
-	Name                 string        `protobuf:"bytes,4,opt,name=Name,proto3" json:"Name,omitempty"`
-	Phone                string        `protobuf:"bytes,5,opt,name=Phone,proto3" json:"Phone,omitempty"`
-	Address              *Address      `protobuf:"bytes,6,opt,name=Address,proto3" json:"Address,omitempty"`
-	AddressID            uint32        `protobuf:"varint,7,opt,name=AddressID,proto3" json:"AddressID,omitempty"`
-	CreditCards          []*CreditCard `protobuf:"bytes,8,rep,name=CreditCards,proto3" json:"CreditCards,omitempty"`
+	FirstName            string        `protobuf:"bytes,4,opt,name=FirstName,proto3" json:"FirstName,omitempty"`
+	LastName             string        `protobuf:"bytes,5,opt,name=LastName,proto3" json:"LastName,omitempty"`
+	Username             string        `protobuf:"bytes,6,opt,name=Username,proto3" json:"Username,omitempty"`
+	Password             string        `protobuf:"bytes,7,opt,name=Password,proto3" json:"Password,omitempty"`
+	Role                 User_AuthRole `protobuf:"varint,8,opt,name=Role,proto3,enum=models.User_AuthRole" json:"Role,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
 	XXX_sizecache        int32         `json:"-"`
@@ -36,7 +62,7 @@ func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_models_51de2e1d28a81cfe, []int{0}
+	return fileDescriptor_models_21b25800083d68d8, []int{0}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -77,206 +103,63 @@ func (m *User) GetUpdatedAt() uint32 {
 	return 0
 }
 
-func (m *User) GetName() string {
+func (m *User) GetFirstName() string {
 	if m != nil {
-		return m.Name
+		return m.FirstName
 	}
 	return ""
 }
 
-func (m *User) GetPhone() string {
+func (m *User) GetLastName() string {
 	if m != nil {
-		return m.Phone
+		return m.LastName
 	}
 	return ""
 }
 
-func (m *User) GetAddress() *Address {
+func (m *User) GetUsername() string {
 	if m != nil {
-		return m.Address
-	}
-	return nil
-}
-
-func (m *User) GetAddressID() uint32 {
-	if m != nil {
-		return m.AddressID
-	}
-	return 0
-}
-
-func (m *User) GetCreditCards() []*CreditCard {
-	if m != nil {
-		return m.CreditCards
-	}
-	return nil
-}
-
-type Address struct {
-	ID                   uint32   `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	CreatedAt            uint32   `protobuf:"varint,2,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
-	UpdatedAt            uint32   `protobuf:"varint,3,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
-	Street               string   `protobuf:"bytes,4,opt,name=street,proto3" json:"street,omitempty"`
-	City                 string   `protobuf:"bytes,5,opt,name=city,proto3" json:"city,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *Address) Reset()         { *m = Address{} }
-func (m *Address) String() string { return proto.CompactTextString(m) }
-func (*Address) ProtoMessage()    {}
-func (*Address) Descriptor() ([]byte, []int) {
-	return fileDescriptor_models_51de2e1d28a81cfe, []int{1}
-}
-func (m *Address) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Address.Unmarshal(m, b)
-}
-func (m *Address) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Address.Marshal(b, m, deterministic)
-}
-func (dst *Address) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Address.Merge(dst, src)
-}
-func (m *Address) XXX_Size() int {
-	return xxx_messageInfo_Address.Size(m)
-}
-func (m *Address) XXX_DiscardUnknown() {
-	xxx_messageInfo_Address.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Address proto.InternalMessageInfo
-
-func (m *Address) GetID() uint32 {
-	if m != nil {
-		return m.ID
-	}
-	return 0
-}
-
-func (m *Address) GetCreatedAt() uint32 {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return 0
-}
-
-func (m *Address) GetUpdatedAt() uint32 {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return 0
-}
-
-func (m *Address) GetStreet() string {
-	if m != nil {
-		return m.Street
+		return m.Username
 	}
 	return ""
 }
 
-func (m *Address) GetCity() string {
+func (m *User) GetPassword() string {
 	if m != nil {
-		return m.City
+		return m.Password
 	}
 	return ""
 }
 
-type CreditCard struct {
-	ID                   uint32   `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	CreatedAt            uint32   `protobuf:"varint,2,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`
-	UpdatedAt            uint32   `protobuf:"varint,3,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`
-	Number               uint32   `protobuf:"varint,4,opt,name=number,proto3" json:"number,omitempty"`
-	UserID               uint32   `protobuf:"varint,5,opt,name=UserID,proto3" json:"UserID,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *CreditCard) Reset()         { *m = CreditCard{} }
-func (m *CreditCard) String() string { return proto.CompactTextString(m) }
-func (*CreditCard) ProtoMessage()    {}
-func (*CreditCard) Descriptor() ([]byte, []int) {
-	return fileDescriptor_models_51de2e1d28a81cfe, []int{2}
-}
-func (m *CreditCard) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CreditCard.Unmarshal(m, b)
-}
-func (m *CreditCard) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CreditCard.Marshal(b, m, deterministic)
-}
-func (dst *CreditCard) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CreditCard.Merge(dst, src)
-}
-func (m *CreditCard) XXX_Size() int {
-	return xxx_messageInfo_CreditCard.Size(m)
-}
-func (m *CreditCard) XXX_DiscardUnknown() {
-	xxx_messageInfo_CreditCard.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_CreditCard proto.InternalMessageInfo
-
-func (m *CreditCard) GetID() uint32 {
+func (m *User) GetRole() User_AuthRole {
 	if m != nil {
-		return m.ID
+		return m.Role
 	}
-	return 0
-}
-
-func (m *CreditCard) GetCreatedAt() uint32 {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return 0
-}
-
-func (m *CreditCard) GetUpdatedAt() uint32 {
-	if m != nil {
-		return m.UpdatedAt
-	}
-	return 0
-}
-
-func (m *CreditCard) GetNumber() uint32 {
-	if m != nil {
-		return m.Number
-	}
-	return 0
-}
-
-func (m *CreditCard) GetUserID() uint32 {
-	if m != nil {
-		return m.UserID
-	}
-	return 0
+	return User_ROLE_USER
 }
 
 func init() {
 	proto.RegisterType((*User)(nil), "models.User")
-	proto.RegisterType((*Address)(nil), "models.Address")
-	proto.RegisterType((*CreditCard)(nil), "models.CreditCard")
+	proto.RegisterEnum("models.User_AuthRole", User_AuthRole_name, User_AuthRole_value)
 }
 
-func init() { proto.RegisterFile("models.proto", fileDescriptor_models_51de2e1d28a81cfe) }
+func init() { proto.RegisterFile("models.proto", fileDescriptor_models_21b25800083d68d8) }
 
-var fileDescriptor_models_51de2e1d28a81cfe = []byte{
-	// 264 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x92, 0xb1, 0x4e, 0xc3, 0x30,
-	0x10, 0x86, 0xe5, 0x34, 0x4d, 0xe9, 0x85, 0x80, 0x74, 0x42, 0xc8, 0x03, 0x43, 0x94, 0x29, 0x2c,
-	0x1d, 0x0a, 0x2f, 0x50, 0x25, 0x4b, 0x16, 0x84, 0x2c, 0xf5, 0x01, 0x52, 0x7c, 0x12, 0x95, 0x48,
-	0x53, 0xd9, 0x66, 0x60, 0x64, 0xe3, 0x9d, 0x59, 0x90, 0x9d, 0x6b, 0xc2, 0x03, 0x64, 0xbb, 0xff,
-	0xfb, 0x2d, 0xdf, 0xaf, 0xdf, 0x86, 0xeb, 0xae, 0xd7, 0xf4, 0x61, 0x37, 0x67, 0xd3, 0xbb, 0x1e,
-	0x93, 0x41, 0x15, 0xbf, 0x02, 0xe2, 0xbd, 0x25, 0x83, 0x37, 0x10, 0x35, 0xb5, 0x14, 0xb9, 0x28,
-	0x33, 0x15, 0x35, 0x35, 0x3e, 0xc0, 0xba, 0x32, 0xd4, 0x3a, 0xd2, 0x3b, 0x27, 0xa3, 0x80, 0x27,
-	0xe0, 0xdd, 0xfd, 0x59, 0xb3, 0xbb, 0x18, 0xdc, 0x11, 0x20, 0x42, 0xfc, 0xd2, 0x76, 0x24, 0xe3,
-	0x5c, 0x94, 0x6b, 0x15, 0x66, 0xbc, 0x83, 0xe5, 0xeb, 0x7b, 0x7f, 0x22, 0xb9, 0x0c, 0x70, 0x10,
-	0xf8, 0x08, 0xab, 0x9d, 0xd6, 0x86, 0xac, 0x95, 0x49, 0x2e, 0xca, 0x74, 0x7b, 0xbb, 0xe1, 0x98,
-	0x8c, 0xd5, 0xc5, 0xf7, 0x2b, 0x79, 0x6c, 0x6a, 0xb9, 0x1a, 0x56, 0x8e, 0x00, 0x9f, 0x21, 0xad,
-	0x0c, 0xe9, 0xa3, 0xab, 0x5a, 0xa3, 0xad, 0xbc, 0xca, 0x17, 0x65, 0xba, 0xc5, 0xcb, 0x65, 0x93,
-	0xa5, 0xfe, 0x1f, 0x2b, 0xbe, 0xc5, 0xb8, 0x7f, 0xd6, 0x02, 0xee, 0x21, 0xb1, 0xce, 0x10, 0x39,
-	0xae, 0x80, 0x95, 0x2f, 0xe6, 0xed, 0xe8, 0xbe, 0xb8, 0x83, 0x30, 0x17, 0x3f, 0x02, 0x60, 0xca,
-	0x34, 0x77, 0x8c, 0xd3, 0x67, 0x77, 0x20, 0x13, 0x62, 0x64, 0x8a, 0x95, 0xe7, 0xfe, 0xcd, 0x9b,
-	0x3a, 0x04, 0xc9, 0x14, 0xab, 0x43, 0x12, 0xfe, 0xc6, 0xd3, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff,
-	0x79, 0x77, 0xf7, 0xd2, 0x2b, 0x02, 0x00, 0x00,
+var fileDescriptor_models_21b25800083d68d8 = []byte{
+	// 237 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x44, 0xd0, 0xc1, 0x4a, 0xc3, 0x30,
+	0x1c, 0xc7, 0x71, 0x13, 0x6b, 0x6d, 0xff, 0xb8, 0x32, 0xfe, 0xa0, 0x04, 0xf1, 0x50, 0x76, 0xaa,
+	0x97, 0x1e, 0xf4, 0x09, 0xca, 0x5a, 0xa1, 0x30, 0x3b, 0x89, 0xeb, 0x79, 0x54, 0x12, 0x50, 0xd8,
+	0xcc, 0x48, 0x22, 0xbe, 0x97, 0x4f, 0x28, 0x49, 0xda, 0xf5, 0xf8, 0xfb, 0x7e, 0x5a, 0x48, 0x02,
+	0x37, 0x47, 0x25, 0xe4, 0xc1, 0x94, 0x27, 0xad, 0xac, 0xc2, 0x38, 0xac, 0xd5, 0x1f, 0x85, 0xa8,
+	0x37, 0x52, 0x63, 0x06, 0xb4, 0xad, 0x19, 0xc9, 0x49, 0xb1, 0xe0, 0xb4, 0xad, 0xf1, 0x01, 0xd2,
+	0xb5, 0x96, 0x83, 0x95, 0xa2, 0xb2, 0x8c, 0xfa, 0x3c, 0x07, 0xa7, 0xfd, 0x49, 0x8c, 0x7a, 0x19,
+	0xf4, 0x1c, 0x9c, 0xbe, 0x7c, 0x69, 0x63, 0xbb, 0xe1, 0x28, 0x59, 0x94, 0x93, 0x22, 0xe5, 0x73,
+	0xc0, 0x7b, 0x48, 0x36, 0xc3, 0x88, 0x57, 0x1e, 0xcf, 0xdb, 0x99, 0x3b, 0xcd, 0xb7, 0xb3, 0x38,
+	0xd8, 0xb4, 0x9d, 0xbd, 0x0d, 0xc6, 0xfc, 0x2a, 0x2d, 0xd8, 0x75, 0xb0, 0x69, 0xe3, 0x23, 0x44,
+	0x5c, 0x1d, 0x24, 0x4b, 0x72, 0x52, 0x64, 0x4f, 0xb7, 0xe5, 0x78, 0x57, 0xf7, 0x6f, 0x59, 0xfd,
+	0xd8, 0x4f, 0x87, 0xdc, 0x7f, 0xb2, 0xaa, 0x20, 0x99, 0x0a, 0x2e, 0x20, 0xe5, 0xdb, 0x4d, 0xb3,
+	0xef, 0xdf, 0x1b, 0xbe, 0xbc, 0xc0, 0x3b, 0x40, 0x3f, 0xd7, 0xdb, 0x6e, 0xd7, 0x74, 0xbb, 0x7d,
+	0x55, 0xbf, 0xb6, 0xdd, 0x92, 0x60, 0x06, 0xe0, 0x7b, 0xd8, 0xf4, 0x23, 0xf6, 0x6f, 0xf8, 0xfc,
+	0x1f, 0x00, 0x00, 0xff, 0xff, 0xe0, 0xbc, 0xc0, 0x62, 0x53, 0x01, 0x00, 0x00,
 }

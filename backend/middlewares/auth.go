@@ -5,78 +5,92 @@ import (
     "github.com/appleboy/gin-jwt"
     "time"
     "github.com/app8izer/go-gin-ng6-starter/backend/utils"
+    "github.com/app8izer/go-gin-ng6-starter/backend/services"
+    "github.com/app8izer/go-gin-ng6-starter/backend/models"
+    "net/http"
+    "errors"
 )
 
-var authMiddleware *jwt.GinJWTMiddleware
-
-// only example code
-type User struct {
-    UserName  string
-    FirstName string
-    LastName  string
-    Role string
+type JwtMiddleware struct {
+    *jwt.GinJWTMiddleware
 }
 
+var authMiddleware *JwtMiddleware
+var userService = services.GetUserServiceInstance()
+
+// auth error types
+
+var (
+    ErrNotAdmin = errors.New("Has not admin role.")
+    ErrNotContentAdmin = errors.New("Has not content admin role.")
+)
+
 func init() {
-    // TODO: check where to use util getenv
-    authMiddleware = &jwt.GinJWTMiddleware{
-        Realm:      utils.GetEnv("REALM", "b-rpc test"),
-        Key:        []byte(utils.GetEnv("KEY", "secret key")),
-        Timeout:    time.Hour,
-        MaxRefresh: time.Hour,
-        // login handler
-        Authenticator: authenticate,
-        // access permission check
-        Authorizator: authorize,
-        // unauthorized handler
-        Unauthorized: unauthorized,
-        PayloadFunc: payload,
-        // TokenLookup is a string in the form of "<source>:<name>" that is used
-        // to extract token from the request.
-        // Optional. Default value "header:Authorization".
-        // Possible values:
-        // - "header:<name>"
-        // - "query:<name>"
-        // - "cookie:<name>"
-        TokenLookup: "header: Authorization, query: token, cookie: jwt",
-        // TokenLookup: "query:token",
-        // TokenLookup: "cookie:token",
+    authMiddleware = &JwtMiddleware{
+        &jwt.GinJWTMiddleware{
+            Realm:      utils.GetEnv("REALM", "b-rpc test"),
+            Key:        []byte(utils.GetEnv("KEY", "secret key")),
+            Timeout:    time.Hour,
+            MaxRefresh: time.Hour,
+            Authenticator: authenticate,
+            Authorizator: authorize,
+            Unauthorized: unauthorized,
+            PayloadFunc: payload,
+            TokenLookup: "header: Authorization, query: token, cookie: jwt",
+            TokenHeadName: "Bearer",
+            TimeFunc: time.Now,
+        },
 
-        // TokenHeadName is a string in the header. Default value is "Bearer"
-        TokenHeadName: "Bearer",
-
-        // TimeFunc provides the current time. You can override it to use another time value. This is useful for testing or if your server uses a different time zone than your tokens.
-        TimeFunc: time.Now,
     }
 
 }
 
-func GetAuthMiddleware() *jwt.GinJWTMiddleware {
+func GetAuthMiddleware() *JwtMiddleware {
     return authMiddleware
 }
 
-func authenticate(userId string, password string, c *gin.Context) (interface{}, bool) {
+func (mw *JwtMiddleware) AdminMiddleware(c *gin.Context){
+    claims := jwt.ExtractClaims(c)
 
-    // find user in db -> verify pw -> let handler create token (what to return)
-
-    if (userId == "admin" && password == "admin") || (userId == "test" && password == "test") {
-        return &User{
-        UserName:  userId,
-        LastName:  "Bo-Yi",
-        FirstName: "Wu",
-        Role: "chief",
-        }, true
+    if !hasRole(int32(claims["role"].(float64)), models.User_ROLE_ADMIN) {
+        c.Abort()
+        mw.Unauthorized(c, http.StatusUnauthorized, mw.HTTPStatusMessageFunc(ErrNotAdmin, c))
+        return
     }
-        return nil, false
+
+    c.Next()
+}
+
+func (mw *JwtMiddleware) ContentAdminMiddleware(c *gin.Context){
+    claims := jwt.ExtractClaims(c)
+
+    if !hasRole(int32(claims["role"].(float64)), models.User_ROLE_CONTENT_ADMIN) {
+        c.Abort()
+        mw.Unauthorized(c, http.StatusUnauthorized, mw.HTTPStatusMessageFunc(ErrNotContentAdmin, c))
+        return
+    }
+    c.Next()
+}
+
+
+// login
+func authenticate(username string, password string, c *gin.Context) (interface{}, bool) {
+
+    user := userService.GetByUsername(username)
+
+    if user != nil && services.CheckPasswordHash(password, user.Password) {
+        return user, true
+    }
+    return nil, false
+
 }
 
 func authorize(user interface{}, c *gin.Context) bool {
 
-    if v, ok := user.(string); ok && v == "admin" {
-        return true
-    }
+    claims := jwt.ExtractClaims(c)
 
-    return false
+    return hasRole(int32(claims["role"].(float64)), models.User_ROLE_USER)
+
 }
 
 func unauthorized(c *gin.Context, code int, message string) {
@@ -87,14 +101,14 @@ func unauthorized(c *gin.Context, code int, message string) {
 }
 
 func payload(data interface{}) jwt.MapClaims {
-    // in this method, you'd want to fetch some user info
-    // based on their email address (which is provided once
-    // they've successfully logged in).  the information
-    // you set here will be available the lifetime of the
-    // user's session
-    //val := data.(*User)
+
+    user := data.(*models.User)
+
     return map[string]interface{}{
-        "id":   "1349",
-        "role": "admin",
+        "role": user.Role,
     }
+}
+
+func hasRole(role int32, desiredRole models.User_AuthRole) bool {
+    return role >= int32(desiredRole)
 }
