@@ -15,9 +15,9 @@ before_install:
   - go get -u github.com/kardianos/govendor
 
 install:
-  - pwd
   - govendor sync
-  - cd $TRAVIS_BUILD_DIR/frontend && yarn install --pure-lockfile
+  - cd $TRAVIS_BUILD_DIR/frontend
+  - yarn install --pure-lockfile
 
 services:
   - docker
@@ -26,10 +26,11 @@ notifications:
   email: false
 
 script:
-  - cd $TRAVIS_BUILD_DIR && docker-compose -f docker-compose.test.yml up -d
+  - cd $TRAVIS_BUILD_DIR
+  - docker-compose -f docker-compose.test.yml up -d
   - go test -v ./...
-  - pwd
-  - cd $TRAVIS_BUILD_DIR/frontend && npm run build-prod
+  - cd $TRAVIS_BUILD_DIR/frontend
+  - yarn run build-prod
 
 deploy:
   provider: heroku
@@ -37,5 +38,5 @@ deploy:
   api_key: $HEROKU_API_KEY
   skip_cleanup: true
   local_dir: frontend/docs
-  on:
-    branch: master
+  #on:
+    #branch: master
