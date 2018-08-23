@@ -38,6 +38,6 @@ deploy:
   app: go-rest-ng6-proto
   api_key: $HEROKU_API_KEY
   skip_cleanup: true
-  local_dir: frontend/docs
+  local_dir: frontend/dist
   #on:
     #branch: master
