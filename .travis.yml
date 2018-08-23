@@ -39,5 +39,5 @@ deploy:
   api_key: $HEROKU_API_KEY
   skip_cleanup: true
   local_dir: frontend/dist
-  #on:
-    #branch: master
+  on:
+    branch: master

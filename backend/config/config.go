@@ -3,17 +3,18 @@ package config
 import (
     "github.com/spf13/viper"
     "log"
-        )
+)
 
 var config *viper.Viper
 
-func init()  {
+func init() {
     var env string
     v := viper.New()
     v.AutomaticEnv() // auto scan for ENV
     if v.GetString("APP_ENV") == "" {
         log.Printf("No env specified. Using dev as default.")
         env = "dev"
+        v.Set("APP_ENV", "dev")
     } else {
         env = v.GetString("APP_ENV")
     }

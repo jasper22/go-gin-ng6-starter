@@ -1,7 +1,7 @@
 {
 	"comment": "",
 	"heroku": {
-        "goVersion": "1.10.3",
+		"goVersion": "1.10.3",
 		"install": [
 			"./..."
 		]
@@ -55,6 +55,36 @@
 			"path": "github.com/gin-gonic/gin/render",
 			"revision": "9666ba67383f6cc7bed3bb18691c2382717d51ae",
 			"revisionTime": "2018-08-07T05:49:31Z"
+		},
+		{
+			"checksumSHA1": "PHWVOWoveaZsbQ2h7XzeK4zBuv4=",
+			"path": "github.com/golang-migrate/migrate",
+			"revision": "beb09d85faffcee526b16ed19dea30c1dd843578",
+			"revisionTime": "2018-08-15T07:31:58Z"
+		},
+		{
+			"checksumSHA1": "/+p+Vv7+iSwi1r5jI9vfrvpck1Y=",
+			"path": "github.com/golang-migrate/migrate/database",
+			"revision": "beb09d85faffcee526b16ed19dea30c1dd843578",
+			"revisionTime": "2018-08-15T07:31:58Z"
+		},
+		{
+			"checksumSHA1": "X9N5sX0vieHGUK0LsXopdmrd5ME=",
+			"path": "github.com/golang-migrate/migrate/database/postgres",
+			"revision": "beb09d85faffcee526b16ed19dea30c1dd843578",
+			"revisionTime": "2018-08-15T07:31:58Z"
+		},
+		{
+			"checksumSHA1": "/Zm1Z1U1w7pNdPY0H7vaG0SLmFQ=",
+			"path": "github.com/golang-migrate/migrate/source",
+			"revision": "beb09d85faffcee526b16ed19dea30c1dd843578",
+			"revisionTime": "2018-08-15T07:31:58Z"
+		},
+		{
+			"checksumSHA1": "+UCQeYrep6UWvMEhYOjH9pv08yc=",
+			"path": "github.com/golang-migrate/migrate/source/file",
+			"revision": "beb09d85faffcee526b16ed19dea30c1dd843578",
+			"revisionTime": "2018-08-15T07:31:58Z"
 		},
 		{
 			"checksumSHA1": "uuLcVQXUw0CNt8Y5tsmzLWGlixI=",
