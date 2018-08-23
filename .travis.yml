@@ -25,13 +25,13 @@ script:
   - go test -v ./...
 
 before_deploy:
-   - nvm install $NODE_VERSION
-   - npm install -g --silent @angular/cli@6.1.3
-   - npm install -g yarn
-   - cd $TRAVIS_BUILD_DIR/frontend
-   - yarn install --pure-lockfile
-   - yarn run build-prod
-   - cd $TRAVIS_BUILD_DIR
+  - nvm install $NODE_VERSION
+  - npm install -g --silent @angular/cli@6.1.3
+  - npm install -g yarn
+  - cd $TRAVIS_BUILD_DIR/frontend
+  - yarn install --pure-lockfile
+  - yarn run build-prod
+  - cd $TRAVIS_BUILD_DIR
 
 deploy:
   provider: heroku
