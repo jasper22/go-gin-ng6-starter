@@ -17,7 +17,7 @@ before_install:
 install:
   - pwd
   - govendor sync
-  - cd ./frontend && yarn install --pure-lockfile
+  - cd $TRAVIS_BUILD_DIR/frontend && yarn install --pure-lockfile
 
 services:
   - docker
@@ -26,10 +26,10 @@ notifications:
   email: false
 
 script:
-  - docker-compose -f docker-compose.test.yml up -d
+  - cd $TRAVIS_BUILD_DIR && docker-compose -f docker-compose.test.yml up -d
   - go test -v ./...
   - pwd
-  - cd ./frontend && npm run build-prod
+  - cd $TRAVIS_BUILD_DIR/frontend && npm run build-prod
 
 deploy:
   provider: heroku
